@@ -3,6 +3,7 @@ name: Scheduled
 on:
   pull-request:
     types: [opened, edited]
+    branches: [main]
 
 jobs:
   build:
