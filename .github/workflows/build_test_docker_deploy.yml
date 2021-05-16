@@ -1,0 +1,43 @@
+name: Build_and_Deploy
+
+on:
+  push:
+    branches:
+      - maina
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+
+      - name: Downloada
+        run: go mod download
+
+      - name: Builds
+        run: GOOS=linux GOARCH=arm64 go build -v -o app ./...
+
+      - name: Test
+        run: go test -cover -race ./...
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: pafortin/server:latest
+          cache-from: type=registry,ref=pafortin/server:latest
+          cache-to: type=inline
