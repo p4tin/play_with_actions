@@ -19,4 +19,4 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@main
         with:
           image: pafortin/service
-          service: HelloService
+          service: hello-service
