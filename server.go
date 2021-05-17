@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"log"
 	"net/http"
 	
 	"github.com/labstack/echo/v4"
@@ -11,7 +12,8 @@ import (
 func main() {
   port := os.Getenv("PORT")
   if port == "" {
-    port = "8080"	  
+    port = "8080"
+    log.Printf("defaulting to port %s", port)
   }
   e := echo.New()
   e.GET("/", func(c echo.Context) error {
