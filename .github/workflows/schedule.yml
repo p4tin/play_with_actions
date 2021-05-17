@@ -1,0 +1,11 @@
+name: Manually triggered workflow
+on:
+  schedule:
+  - cron: "* * * * *"
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Hello World!!!"
