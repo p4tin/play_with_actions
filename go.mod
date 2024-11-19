@@ -1,5 +1,7 @@
 module play_with_actions
 
-go 1.16
+go 1.22
 
-require github.com/labstack/echo/v4 v4.3.0
+toolchain go1.22.5
+
+require github.com/urbn/gourbnkit/v2 v2.16.0
